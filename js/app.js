@@ -29,13 +29,10 @@ $(function(){
   }
 
   var success = function(data) {
-  	  	console.log(data);
-
   	busDots.clearLayers();
   	var data = data.data.list;
   	_.each(data, function(bus){
   		if (bus.tripStatus !== null) {
-  			console.log(bus);
 
   			// Show it on the map
   			var ll = [bus.tripStatus.position.lat, bus.tripStatus.position.lon];
