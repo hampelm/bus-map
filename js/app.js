@@ -28,11 +28,21 @@ $(function(){
     return s;
   }
 
+
   var success = function(data) {
   	busDots.clearLayers();
+
+  	var trips = _.indexBy(data.data.references.trips, function(trip) {
+  		return trip.id;
+  	});
+
+  	console.log(trips);
+
   	var data = data.data.list;
   	_.each(data, function(bus){
   		if (bus.tripStatus !== null) {
+  			console.log(bus);
+  			;
 
   			// Show it on the map
   			var ll = [bus.tripStatus.position.lat, bus.tripStatus.position.lon];
@@ -44,6 +54,10 @@ $(function(){
   			}
 
   			var marker = L.circleMarker(ll, s);
+
+  			marker.on('mouseover', function() {
+  				$('#route').html(trips[bus.tripId].tripHeadsign.toUpperCase());
+  			});
   			busDots.addLayer(marker);
   		}
   	});
@@ -63,7 +77,7 @@ $(function(){
 
   // Track the buses!
   fetch();
-	window.setInterval(fetch, 3000);
+	//window.setInterval(fetch, 3000);
 
 
 
