@@ -40,13 +40,10 @@ $(function(){
   		return trip.id;
   	});
 
-  	console.log(trips);
 
   	var data = data.data.list;
   	_.each(data, function(bus){
   		if (bus.tripStatus !== null) {
-  			console.log(bus);
-  			;
 
   			// Show it on the map
   			var ll = [bus.tripStatus.position.lat, bus.tripStatus.position.lon];
