@@ -1,8 +1,12 @@
 $(function(){
-  var map = L.map('map').setView([42.369594,-83.075438], 11);
-
+  var map = L.map('map').fitBounds([
+  	[42.277816819534955, -83.2708740234375],
+  	[42.47108395294282, -82.87605285644531]
+  ]);
   baseLayer = L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-zmpggdzn/{z}/{x}/{y}.png');
   map.addLayer(baseLayer);
+  map
+
 
   var busDots = L.layerGroup().addTo(map);
 
@@ -77,7 +81,7 @@ $(function(){
 
   // Track the buses!
   fetch();
-	//window.setInterval(fetch, 3000);
+	window.setInterval(fetch, 3000);
 
 
 
