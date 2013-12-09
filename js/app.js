@@ -5,8 +5,6 @@ $(function(){
   ]);
   baseLayer = L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-zmpggdzn/{z}/{x}/{y}.png');
   map.addLayer(baseLayer);
-  map
-
 
   var busDots = L.layerGroup().addTo(map);
 
@@ -20,7 +18,6 @@ $(function(){
     radius: 5
   };
 
-
   var getStyle = function(d) {
     var s = _.clone(style);
     if (!d) return s;
@@ -31,7 +28,6 @@ $(function(){
     if (d >= 20) { s.fillColor ="#e20027" };
     return s;
   }
-
 
   var success = function(data) {
     busDots.clearLayers();
@@ -78,7 +74,7 @@ $(function(){
 
   // Track the buses!
   fetch();
-  window.setInterval(fetch, 3000);
+  window.setInterval(fetch, 2500);
 
 
 
