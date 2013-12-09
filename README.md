@@ -1,7 +1,7 @@
-bus-map
+[Live DDOT System Map](http://hampelm.github.io/bus-map)
 =======
 
-A map of all active DDOT buses. It updates every 2.5 seconds.
+A map of all DDOT buses on the road. It updates every 2.5 seconds.
 
 
 How we did it
