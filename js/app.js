@@ -3,7 +3,9 @@ $(function(){
     [42.277816819534955, -83.2708740234375],
     [42.47108395294282, -82.87605285644531]
   ]);
-  baseLayer = L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-zmpggdzn/{z}/{x}/{y}.png');
+  baseLayer = L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-zmpggdzn/{z}/{x}/{y}.png', {
+    detectRetina: false
+  });
   map.addLayer(baseLayer);
 
   var busDots = L.layerGroup().addTo(map);
@@ -30,12 +32,13 @@ $(function(){
   }
 
   var success = function(data) {
+    // console.log(data);
+
     busDots.clearLayers();
 
     var trips = _.indexBy(data.data.references.trips, function(trip) {
       return trip.id;
     });
-
 
     var data = data.data.list;
     _.each(data, function(bus){
