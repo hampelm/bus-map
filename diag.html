@@ -11,6 +11,28 @@
   <body>
     <div id="map"></div>
 
+    <div id="legend" class="trips">
+      <div class="trip unknown">
+        <div class="num"></div>
+        untracked
+      </div>
+      <div class="trip ontime">
+        <div class="num"></div>
+        on time
+      </div>
+      <div class="trip behind">
+        <div class="num"></div>
+        5 min late
+      </div>
+      <div class="trip late">
+        <div class="num"></div>
+        10 min late
+      </div>
+      <div class="trip verylate">
+        <div class="num"></div>
+        20+ min late
+      </div>
+    </div>
 
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
@@ -20,15 +42,15 @@
 
 
     <script type="text/template" id="t-bus-info">
-<p>
-Headsign: <%= bus.headsign %>
-<br />
-GTFS Vehicle ID: <%= bus.vehicleId %>
-<br />
-GTFS Trip ID: <%= bus.tripId %>
-<br />
-Next stop <%= bus.tripStatus.nextStop %> in <%= bus.tripStatus.nextStopTimeOffset %> seconds
-</p>
+      <p>
+      Headsign: <%= bus.headsign %>
+      <br />
+      GTFS Vehicle ID: <%= bus.vehicleId %>
+      <br />
+      GTFS Trip ID: <%= bus.tripId %>
+      <br />
+      Next stop <%= bus.tripStatus.nextStop %> in <%= bus.tripStatus.nextStopTimeOffset %> seconds
+      </p>
     </script>
   </body>
 </html>
