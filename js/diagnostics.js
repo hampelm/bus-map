@@ -46,6 +46,7 @@ $(function(){
 
 
         bus.headsign = trips[bus.tripId].tripHeadsign;
+        bus.deviation = bus.tripStatus.scheduleDeviation / 60;
         var popupContent = busInfoTemplate({ bus: bus });
         if (content) {
           // Update existing vehicles
@@ -55,9 +56,10 @@ $(function(){
         } else {
           // Add new vehicles
           // Set the style.
+          var deviation;
           var s = style;
           if (bus.tripStatus.predicted === true) {
-            var deviation = Math.abs(bus.tripStatus.scheduleDeviation) / 60;
+            deviation = Math.abs(bus.tripStatus.scheduleDeviation) / 60;
 
             s = getStyle(deviation);
           }
