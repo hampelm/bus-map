@@ -51,3 +51,37 @@ html, body, #map {
   background: #aaa;
 }
 
+header h1,
+footer h1 {
+  position: absolute;
+  z-index: 100;
+  right: 0;
+  top: 0px;
+  background: #fff;
+  display: inline-block;
+  height: 112px;
+  width: 342px;
+  overflow: auto;
+  margin: 0;
+}
+
+header .logo,
+footer .logo {
+  display: inline-block;
+  height: 112px;
+  width: 112px;
+  background: transparent url(../img/logo.png) no-repeat left center;
+  background-size: auto 112px;
+  text-indent: -99999px;
+  float: left;
+}
+
+header .logotype,
+footer .logotype {
+  display: inline-block;
+  height: 112px;
+  width: 230px;
+  background: transparent url(../img/logotype.png) no-repeat left center;
+  text-indent: -99999px;
+  float: left;
+}
