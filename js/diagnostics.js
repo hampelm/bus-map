@@ -1,7 +1,11 @@
+/*jslint nomen: true */
+/*globals L: true, window: true */
+
 $(function(){
+  'use strict';
   var map = L.map('map').setView([42.369594,-83.075438], 11);
 
-  baseLayer = L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-zmpggdzn/{z}/{x}/{y}.png');
+  var baseLayer = L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-zmpggdzn/{z}/{x}/{y}.png');
   map.addLayer(baseLayer);
 
   var busDots = L.layerGroup().addTo(map);
@@ -16,15 +20,17 @@ $(function(){
     radius: 5
   };
 
-
-  var getStyle = function(d) {
+  var getStyle = function(deviation) {
     var s = _.clone(style);
-    if (!d) return s;
+    // if (!deviation) {
+    //   console.log("Deviation", deviation);
+    //   return s;
+    // }
 
-    if (d >= 0) { s.fillColor = "#6a8c1f"};
-    if (d >= 5) { s.fillColor = "#fcb000"};
-    if (d >= 10) { s.fillColor = "#ff6d49"};
-    if (d >= 20) { s.fillColor ="#e20027" };
+    if (deviation < 5) { s.fillColor = "#6a8c1f"; } // on time - green
+    if (deviation >= 5) { s.fillColor = "#fcb000"; } // a little behind - yellow
+    if (deviation >= 10) { s.fillColor = "#ff6d49"; } // late - orange
+    if (deviation >= 20) { s.fillColor ="#e20027"; } // super late - red
     return s;
   };
 
@@ -36,14 +42,16 @@ $(function(){
       return trip.id;
     });
 
-    var data = data.data.list;
+    data = data.data.list;
     var oldActiveVehicles = activeVehicles;
     activeVehicles = {};
     _.each(data, function(bus){
+      if (bus.tripStatus === null) {
+        console.log(bus);
+      }
       if (bus.tripStatus !== null) {
         var content = oldActiveVehicles[bus.vehicleId];
         var ll = [bus.tripStatus.position.lat, bus.tripStatus.position.lon];
-
 
         bus.headsign = trips[bus.tripId].tripHeadsign;
         bus.deviation = bus.tripStatus.scheduleDeviation / 60;
@@ -85,7 +93,7 @@ $(function(){
       }
     });
 
-  }
+  };
 
   var fetch = function() {
     var jqxhr = $.ajax(apiURL + 'vehicles-for-agency/DDOT.json?key=' + key, {
@@ -97,13 +105,11 @@ $(function(){
     jqxhr.fail(function(error) {
       console.log(error);
     });
-  }
+  };
 
   // Track the buses!
   fetch();
   window.setInterval(fetch, 3000);
-
-
 
 
 });

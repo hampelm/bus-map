@@ -24,7 +24,7 @@ $(function(){
     var s = _.clone(style);
     if (!d) return s;
 
-    if (d >= 0) { s.fillColor = "#6a8c1f"};
+    if (d < 5) { s.fillColor = "#6a8c1f"};
     if (d >= 5) { s.fillColor = "#fcb000"};
     if (d >= 10) { s.fillColor = "#ff6d49"};
     if (d >= 20) { s.fillColor ="#e20027" };
