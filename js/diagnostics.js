@@ -22,10 +22,10 @@ $(function(){
 
   var getStyle = function(deviation) {
     var s = _.clone(style);
-    // if (!deviation) {
-    //   console.log("Deviation", deviation);
-    //   return s;
-    // }
+    if (!deviation) {
+      console.log("Deviation", deviation);
+      return s;
+    }
 
     if (deviation < 5) { s.fillColor = "#6a8c1f"; } // on time - green
     if (deviation >= 5) { s.fillColor = "#fcb000"; } // a little behind - yellow
@@ -38,6 +38,7 @@ $(function(){
   var activeVehicles = {};
 
   var success = function(data) {
+    console.log(data);
     var trips = _.indexBy(data.data.references.trips, function(trip) {
       return trip.id;
     });
@@ -95,21 +96,24 @@ $(function(){
 
   };
 
-  var fetch = function() {
-    var jqxhr = $.ajax(apiURL + 'vehicles-for-agency/DDOT.json?key=' + key, {
-      dataType: 'json'
-    });
 
-    jqxhr.done(success);
+,
+//http://ddot-beta.herokuapp.com/api/api/where/trips-for-location.json?lat=42.333018&lon=-83.052306&latSpan=100&lonSpan=100&key=BETA
+//?key=TEST&lat=47.653&lon=-122.307&latSpan=0.008&lonSpan=0.008
+//      var jqxhr = $.ajax(apiURL + 'vehicles-for-agency/DDOT.json?key=' + key, {
 
-    jqxhr.fail(function(error) {
-      console.log(error);
-    });
-  };
-
-  // Track the buses!
+   var fetch = function() {
+     var jqxhr = $.ajax(apiURL + 'trips-for-location.json?lat=42.33&lon=-83.04&latSpan=100&lonSpan=100&key=' + key, {
+       dataType: 'json'
+     });
+     jqxhr.done(success);
+     jqxhr.fail(function(error) {
+       console.log("error", error);
+     });
+   };
+  // // Track the buses!
   fetch();
-  window.setInterval(fetch, 3000);
+  // window.setInterval(fetch, 3000);
 
 
 });
