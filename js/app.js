@@ -85,6 +85,4 @@ $(function(){
   fetch();
   // window.setInterval(fetch, 4000);
 
-
-
 });
