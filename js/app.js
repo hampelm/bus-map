@@ -77,7 +77,7 @@ $(function(){
 
   // Track the buses!
   fetch();
-  window.setInterval(fetch, 2500);
+  window.setInterval(fetch, 4000);
 
 
 
