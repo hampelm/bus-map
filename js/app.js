@@ -24,10 +24,10 @@ $(function(){
     var s = _.clone(style);
     //if (!d) return s;
 
-    if (d <= 5) { s.fillColor = "#6a8c1f"};
-    if (d >= 5) { s.fillColor = "#fcb000"};
-    if (d >= 10) { s.fillColor = "#ff6d49"};
-    if (d >= 20) { s.fillColor ="#e20027" };
+    if (d <= 5) { s.fillColor = "#6a8c1f"; }
+    if (d >= 5) { s.fillColor = "#fcb000"; }
+    if (d >= 10) { s.fillColor = "#ff6d49"; }
+    if (d >= 20) { s.fillColor ="#e20027"; }
     return s;
   }
 
@@ -63,6 +63,8 @@ $(function(){
     });
   }
 
+  var debounced;
+
   var fetch = function() {
     var jqxhr = $.ajax(apiURL + 'vehicles-for-agency/DDOT.json?key=' + key, {
       dataType: 'json'
@@ -73,12 +75,15 @@ $(function(){
     jqxhr.fail(function(error) {
       console.log(error);
     });
+
+    jqxhr.always(debounced);
   }
+
+  debounced = _.debounce(fetch, 4000);
 
   // Track the buses!
   fetch();
-  window.setInterval(fetch, 2500);
-
+  // window.setInterval(fetch, 4000);
 
 
 
