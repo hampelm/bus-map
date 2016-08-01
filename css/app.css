@@ -59,8 +59,8 @@ footer h1 {
   top: 0px;
   background: #fff;
   display: inline-block;
-  height: 112px;
-  width: 342px;
+  height: 56px;
+  width: 171px;
   overflow: auto;
   margin: 0;
 }
@@ -68,10 +68,10 @@ footer h1 {
 header .logo,
 footer .logo {
   display: inline-block;
-  height: 112px;
-  width: 112px;
+  height: 56px;
+  width: 56px;
   background: transparent url(../img/logo.png) no-repeat left center;
-  background-size: auto 112px;
+  background-size: auto 56px;
   text-indent: -99999px;
   float: left;
 }
@@ -79,8 +79,8 @@ footer .logo {
 header .logotype,
 footer .logotype {
   display: inline-block;
-  height: 112px;
-  width: 230px;
+  height: 56px;
+  width: 115px;
   background: transparent url(../img/logotype.png) no-repeat left center;
   text-indent: -99999px;
   float: left;
