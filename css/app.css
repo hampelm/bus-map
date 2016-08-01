@@ -82,6 +82,7 @@ footer .logotype {
   height: 56px;
   width: 115px;
   background: transparent url(../img/logotype.png) no-repeat left center;
+  background-size: 115px auto;
   text-indent: -99999px;
   float: left;
 }
