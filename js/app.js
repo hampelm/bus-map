@@ -181,6 +181,7 @@ $(function(){
   };
 
   var fetchRoute = function(route) {
+    // http://ddot-beta.herokuapp.com/api/api/where/stops-for-route/DDOT_6382.json?key=LIVEMAP
     var jqxhr = $.ajax(apiURL + 'stops-for-route/' + route.id + '.json?key=' + apiKey, {
       dataType: 'json'
     });
@@ -199,6 +200,7 @@ $(function(){
   };
 
   var fetchRoutes = function() {
+    // http://ddot-beta.herokuapp.com/api/api/where/routes-for-agency/DDOT.json?key=LIVEMAP
     var jqxhr = $.ajax(apiURL + 'routes-for-agency/DDOT.json?key=' + apiKey, {
       dataType: 'json'
     });
@@ -210,7 +212,8 @@ $(function(){
     });
   };
 
-  fetchRoutes();
+  // Disable routes for now
+  // fetchRoutes();
 
 
   var debounced;
