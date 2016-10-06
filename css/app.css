@@ -86,3 +86,10 @@ footer .logotype {
   text-indent: -99999px;
   float: left;
 }
+
+@media screen and (max-width: 1024px) {
+  header h1, 
+  footer h1 {
+    display: none;
+  }
+}
