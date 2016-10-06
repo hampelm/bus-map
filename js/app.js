@@ -79,6 +79,7 @@ $(function(){
 
 
   var bright = function(key) {
+    console.log("using layers", layers, key);
     var options = layers[key].options;
     options.opacity = 1;
     options.dashArray = '';
@@ -131,7 +132,7 @@ $(function(){
 
   var handleClick = function(event, route) {
     var routeId = event.target._routeId;
-    findOverlaps(event);
+    // findOverlaps(event);
   };
 
 
