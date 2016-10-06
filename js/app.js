@@ -1,9 +1,11 @@
+/*globals gju, L: true */
+
 $(function(){
   var map = L.map('map').fitBounds([
     [42.277816819534955, -83.2708740234375],
     [42.47108395294282, -82.87605285644531]
   ]);
-  baseLayer = L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-zmpggdzn/{z}/{x}/{y}.png', {
+  var baseLayer = L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-zmpggdzn/{z}/{x}/{y}.png', {
     detectRetina: false
   });
   map.addLayer(baseLayer);
@@ -15,6 +17,7 @@ $(function(){
 
   var layers = {};
   var geojsons = {};
+  var circles = [];
 
   var style = {
     stroke: false,
@@ -35,9 +38,6 @@ $(function(){
   };
   var RADIUS = 12;
 
-  var layers = {};
-  var geojsons = {};
-  var circles = [];
 
   var getStyle = function(d) {
     var s = _.clone(style);
@@ -48,7 +48,8 @@ $(function(){
     if (d >= 10) { s.fillColor = "#ff6d49"; }
     if (d >= 20) { s.fillColor ="#e20027"; }
     return s;
-  }
+  };
+
 
   var getRouteStyle = function(d) {
     var s = _.clone(ROUTE_STYLE);
@@ -57,6 +58,7 @@ $(function(){
 
     return s;
   };
+
 
   var dim = function() {
     _.each(layers, function(layer) {
@@ -67,12 +69,14 @@ $(function(){
     });
   };
 
+
   var light = function(key) {
     var options = layers[key].options;
     options.opacity = 0.6;
     options.dashArray = '4,4';
     layers[key].setStyle(options);
   };
+
 
   var bright = function(key) {
     var options = layers[key].options;
@@ -81,10 +85,12 @@ $(function(){
     layers[key].setStyle(options);
   };
 
+
   var showOverlaps = function(keys) {
     _.each(layers, dim);
     _.each(keys, light);
   };
+
 
   var addCircle = function(geoJSON) {
     var ll = new L.LatLng(geoJSON.coordinates[0], geoJSON.coordinates[1]);
@@ -93,12 +99,14 @@ $(function(){
     circles.push(circle);
   };
 
+
   var removeCircles = function() {
     _.each(circles, function(circle) {
       map.removeLayer(circle);
     });
     circles = [];
   };
+
 
   var findOverlaps = function(event) {
     var source = event.target.toGeoJSON();
@@ -120,8 +128,20 @@ $(function(){
     bright(routeId);
   };
 
+
+  var handleClick = function(event, route) {
+    var routeId = event.target._routeId;
+    findOverlaps(event);
+  };
+
+
   var success = function(data) {
-    // console.log(data);
+    console.log("Success -- got data", data);
+
+    if (!data.data) {
+      // Sometimes we don't get data -- that shouldn't clear the map.
+      return;
+    }
 
     busDots.clearLayers();
 
@@ -129,7 +149,7 @@ $(function(){
       return trip.id;
     });
 
-    var data = data.data.list;
+    data = data.data.list;
     _.each(data, function(bus){
       if (bus.tripStatus !== null) {
 
@@ -149,14 +169,22 @@ $(function(){
           event.target._routeId = trips[bus.tripId].routeId;
           handleClick(event);
         });
+        marker.on('click', function(event) {
+          $('#route').html(trips[bus.tripId].tripHeadsign.toUpperCase());
+          event.target._routeId = trips[bus.tripId].routeId;
+          handleClick(event);
+        });
         busDots.addLayer(marker);
       }
     });
-  }
 
-  var handleClick = function(event, route) {
-    var routeId = event.target._routeId;
-    findOverlaps(event);
+    var busCount = _.filter(data, function(bus) {
+      return bus.tripStatus !== null;
+    });
+    console.log("Bus count", busCount.length);
+    if (busCount.length) {
+      $('#trips-tracked').html('<strong>' + busCount.length + ' buses tracked</strong>');
+    }
   };
 
   var gotRoute = function(data) {
@@ -229,7 +257,7 @@ $(function(){
     });
 
     jqxhr.always(debounced);
-  }
+  };
 
   debounced = _.debounce(fetch, 4000);
 
