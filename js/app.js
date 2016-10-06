@@ -136,8 +136,6 @@ $(function(){
 
 
   var success = function(data) {
-    console.log("Success -- got data", data);
-
     if (!data.data) {
       // Sometimes we don't get data -- that shouldn't clear the map.
       return;
@@ -181,7 +179,7 @@ $(function(){
     var busCount = _.filter(data, function(bus) {
       return bus.tripStatus !== null;
     });
-    console.log("Bus count", busCount.length);
+
     if (busCount.length) {
       $('#trips-tracked').html('<strong>' + busCount.length + ' buses tracked</strong>');
     }
