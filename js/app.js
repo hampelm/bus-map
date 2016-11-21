@@ -5,14 +5,14 @@ $(function(){
     [42.277816819534955, -83.2708740234375],
     [42.47108395294282, -82.87605285644531]
   ]);
-  var baseLayer = L.tileLayer('http://a.tiles.mapbox.com/v3/matth.map-zmpggdzn/{z}/{x}/{y}.png', {
+  var baseLayer = L.tileLayer('//a.tiles.mapbox.com/v3/matth.map-zmpggdzn/{z}/{x}/{y}.png', {
     detectRetina: false
   });
   map.addLayer(baseLayer);
 
   var busDots = L.layerGroup().addTo(map);
 
-  var apiURL = 'http://ddot-beta.herokuapp.com/api/api/where/';
+  var apiURL = 'https://ddot-beta.herokuapp.com/api/api/where/';
   var apiKey = 'LIVEMAP';
 
   var layers = {};
@@ -245,6 +245,7 @@ $(function(){
 
   var debounced;
   var fetch = function() {
+    console.log("Calling fetched" + new Date());
     var jqxhr = $.ajax(apiURL + 'vehicles-for-agency/DDOT.json?key=' + apiKey, {
       dataType: 'json'
     });
