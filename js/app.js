@@ -259,7 +259,7 @@ $(function(){
     jqxhr.always(debounced);
   };
 
-  debounced = _.debounce(fetch, 4000);
+  debounced = _.debounce(fetch, 5500);
 
   // Track the buses!
   fetch();
