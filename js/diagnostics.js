@@ -11,6 +11,7 @@ $(function(){
   var busDots = L.layerGroup().addTo(map);
 
   var apiURL = 'http://ddot-beta.herokuapp.com/api/api/where/';
+  apiURL = 'https://ddot-proxy-test.herokuapp.com/api/where/';
   var key = 'BETA';
 
   var style = {

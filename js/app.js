@@ -13,6 +13,7 @@ $(function(){
   var busDots = L.layerGroup().addTo(map);
 
   var apiURL = 'https://ddot-beta.herokuapp.com/api/api/where/';
+  apiURL = 'https://ddot-proxy-test.herokuapp.com/api/where/';
   var apiKey = 'LIVEMAP';
 
   var layers = {};

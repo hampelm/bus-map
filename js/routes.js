@@ -4,6 +4,7 @@ $(function(){
   'use strict';
 
   var APIURL = 'http://ddot-beta.herokuapp.com/api/api/where/';
+  APIURL = 'https://ddot-proxy-test.herokuapp.com/api/where/';
   var KEY = 'BETA';
   // http://ddot-beta.herokuapp.com/api/api/where/stops-for-route/DDOT_5514.json?key=BETA
 
