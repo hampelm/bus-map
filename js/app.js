@@ -14,7 +14,7 @@ $(function(){
 
   var apiURL = 'https://ddot-beta.herokuapp.com/api/api/where/';
   apiURL = 'https://ddot-proxy-test.herokuapp.com/api/where/';
-  var apiKey = 'LIVEMAP';
+  var apiKey = 'BETA'; // or LIVEMAP
 
   var layers = {};
   var geojsons = {};
